@@ -21,13 +21,13 @@ API REST para la gestión de usuarios con GO.
 3. Crear la base de datos.
 
 
-4. Migraciones (opcional).
+4. Migraciones usando `golang-migrate` **(opcional)**.
 
     1. Descargar el ejecutable de `golang-migrate` para ejecutar las migraciones:
 
        [Descargar golang-migrate](https://github.com/golang-migrate/migrate/releases)
 
-    2. Guardar el archivo en la siguiente ruta:
+    2. En Windows guardar el archivo en la siguiente ruta:
 
        ```bash
        c:/go-migrate/migrate.exe
@@ -41,11 +41,20 @@ API REST para la gestión de usuarios con GO.
        ```
        Donde el valor de la variable de entorno `DBPWD` es la contraseña de la base de datos.
 
+    4. Dentro de la carpeta [db](./migrations/db) de `migrations` encontrará el script para insertar registros de
+       prueba.
 
-5. Configurar variables de entorno en el archivo `.env` (Ver el archivo `.env.example`).
+
+5. Migraciones usando **pgAdmin**:
+
+    1. Dentro de la carpeta [versions](./migrations/versions) de `migrations` encontrará el script para crear las tablas
+       de la base de datos y en la carpeta [db](./migrations/db) el script para insertar registros de prueba.
 
 
-6. Ejecutar el servidor local:
+6. Configurar variables de entorno en el archivo `.env` (Ver el archivo `.env.example`).
+
+
+7. Ejecutar el servidor local:
 
    ```bash
     go run main.go
