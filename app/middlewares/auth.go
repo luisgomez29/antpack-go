@@ -11,10 +11,6 @@ import (
 func Authentication() echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			if err := next(c); err != nil {
-				return err
-			}
-
 			authzHeader := c.Request().Header.Get(echo.HeaderAuthorization)
 
 			tokenString, err := auth.ExtractToken(authzHeader)

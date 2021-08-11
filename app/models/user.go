@@ -14,14 +14,14 @@ import (
 
 // User represents the data about a user.
 type User struct {
-	ID        uint       `json:"id"`
-	FirstName string     `gorm:"not null;size:40" json:"first_name,omitempty"`
-	LastName  string     `gorm:"not null;size:40;" json:"last_name,omitempty"`
-	FullName  string     `gorm:"-" json:"full_name,omitempty"`
-	Email     string     `gorm:"not null;size:60;unique" json:"email,omitempty"`
-	Password  string     `gorm:"not null;size:128" json:"password,omitempty"`
-	CreatedAt *time.Time `gorm:"not null;default:now()" json:"created_at,omitempty"`
-	UpdatedAt *time.Time `gorm:"not null;default:now()" json:"updated_at,omitempty"`
+	ID        uint      `json:"id"`
+	FirstName string    `json:"first_name"`
+	LastName  string    `json:"last_name"`
+	FullName  string    `gorm:"-" json:"full_name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 func (u *User) AfterSave(*gorm.DB) error {
