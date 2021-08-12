@@ -82,7 +82,38 @@ La API REST proporciona las siguientes rutas:
 | Get all users  | /users | Yes | GET |
 | Get User  | /users/:id | Yes | GET |
 
-## Author
+## Estructura del proyecto
+
+Se utilizan los principios del patrón de diseño MVC para hacer mantenible y escalable el proyecto.
+
+```
+anpack-go
+├── app                         Aplicación principal del proyecto.
+│   ├── auth                    Servicio de autenticación.
+│   ├── controllers             Funciones de controlador para una ruta en particular.
+│   ├── middlewares             Middlewares que se utilizarán en el proyecto.
+│   ├── models                  Tablas de la base de datos que se utilizarán como estructura de modelos.
+│   ├── repositories            Persistir los datos en la base de datos.
+│   ├── resources               Contiene estructuras que se usan como respuestas.
+│   ├── ├── api                 Recursos asosiados a la API.
+│   ├── ├── ├── errors          Tipos y manejo de errores.
+│   ├── ├── ├── requests        Estructuras y otros modelos usados para hacer solicitudes.
+│   ├── ├── ├── responses       Estructuras y otros modelos usadas como respuesta.
+│   └── routes                  Rutas de la API.
+│   └── services                Logica de negocio.
+│   └── utils                   Funciones de ayuda utilizadas en todo el proyecto.
+├── migrations                  Migraciones de base de datos
+│   ├── db                      Archivos de consultas SQL.
+│   ├── versions                Versiones individuales del esquema de la base de datos.
+├── pkg                         Paquetes generales independientes del framework usado.
+│   ├── config                  Archivos para leer variables de entorno.
+│   ├── database                Archivos para conectarse a base de datos.
+├── main.go                     Punto de entrada para iniciar el servidor.
+├── .env.example                Archivo de ejemplo para configurar las variables de entorno.
+├── migrate.sh                  Script para ejecutar las migraciones de la base de datos.
+```
+
+## Autor
 
 **Luis Guillermo Gómez**
 
