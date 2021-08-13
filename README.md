@@ -119,7 +119,7 @@ anpack-go
 │   ├── ├── api                 Recursos asosiados a la API.
 │   ├── ├── ├── errors          Tipos y manejo de errores.
 │   ├── ├── ├── requests        Estructuras y otros modelos usados para hacer solicitudes.
-│   ├── ├── ├── responses       Estructuras y otros modelos usadas como respuesta.
+│   ├── └── └── responses       Estructuras y otros modelos usadas como respuesta.
 │   ├── routes                  Rutas de la API.
 │   ├── services                Logica de negocio.
 │   └── utils                   Funciones de ayuda utilizadas en todo el proyecto.

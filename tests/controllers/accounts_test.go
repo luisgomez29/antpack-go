@@ -45,6 +45,7 @@ func TestSignUp(t *testing.T) {
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusCreated, recorder.Code)
+				requireBodyMatchAccount(t, recorder.Body, user)
 			},
 		},
 		{
@@ -200,6 +201,7 @@ func TestLogin(t *testing.T) {
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)
+				requireBodyMatchAccount(t, recorder.Body, user)
 			},
 		},
 		{

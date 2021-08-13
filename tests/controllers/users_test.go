@@ -47,6 +47,7 @@ func TestAll(t *testing.T) {
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)
+				requireBodyMatchUsers(t, recorder.Body, users)
 			},
 		},
 		{
@@ -128,6 +129,7 @@ func TestGet(t *testing.T) {
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusOK, recorder.Code)
+				requireBodyMatchUser(t, recorder.Body, user)
 			},
 		},
 		{
