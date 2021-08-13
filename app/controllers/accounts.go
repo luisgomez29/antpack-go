@@ -64,5 +64,5 @@ func (ct accountsController) Login(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusCreated, res)
+	return c.JSON(http.StatusOK, res)
 }

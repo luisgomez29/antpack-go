@@ -49,7 +49,7 @@ func NewAuth(at repositories.AuthRepository) Auth {
 }
 
 func (auth) HashPassword(password string) (string, error) {
-	return generateFromPassword(NewPasswordConfig(), password)
+	return HashPassword(NewPasswordConfig(), password)
 }
 
 func (auth) VerifyPassword(password, hashedPassword string) (bool, error) {

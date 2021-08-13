@@ -13,12 +13,12 @@ import (
 	"github.com/luisgomez29/antpack-go/pkg/config"
 )
 
-// Authorization type
-const authorizationTypeBearer = "Bearer"
+// AuthorizationTypeBearer Authorization type Bearer
+const AuthorizationTypeBearer = "Bearer"
 
 // JWT tokens type
 const (
-	JWTAccessToken = "access"
+	JWTAccessToken  = "access"
 	JWTRefreshToken = "refresh"
 )
 
@@ -109,8 +109,8 @@ func VerifyToken(token string, tokenType ...string) (jwt.MapClaims, error) {
 
 // ExtractToken get the token from the request header.
 func ExtractToken(authzHeader string) (string, error) {
-	l := len(authorizationTypeBearer)
-	if len(authzHeader) > l+1 && authzHeader[:l] == authorizationTypeBearer {
+	l := len(AuthorizationTypeBearer)
+	if len(authzHeader) > l+1 && authzHeader[:l] == AuthorizationTypeBearer {
 		return authzHeader[l+1:], nil
 	}
 	return "", errJWTMissing

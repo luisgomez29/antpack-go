@@ -37,8 +37,8 @@ func NewPasswordConfig() *passwordConfig {
 	}
 }
 
-// generateFromPassword generate a hash of the password using the Argon2id variant.
-func generateFromPassword(c *passwordConfig, password string) (string, error) {
+// HashPassword generate a hash of the password using the Argon2id variant.
+func HashPassword(c *passwordConfig, password string) (string, error) {
 	// Generate a cryptographically secure random salt.
 	salt, err := generateRandomBytes(c.saltLength)
 	if err != nil {

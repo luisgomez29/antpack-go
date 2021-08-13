@@ -32,7 +32,7 @@ func NewAccountRepository(db *gorm.DB) AccountRepository {
 
 func (r accountRepository) FindUser(email string) (*models.User, error) {
 	user := new(models.User)
-	if err := r.conn.Debug().Where("email = ?", email).Take(user).Error; errors.Is(err, gorm.ErrRecordNotFound) {
+	if err := r.conn.Where("email = ?", email).Take(user).Error; errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, apiErrors.NewErrNoRows("usuario o contraseña incorrectos")
 	}
 	return user, nil

@@ -82,6 +82,14 @@ La API REST proporciona las siguientes rutas:
 | Get all users  | /users | Yes | GET |
 | Get User  | /users/:id | Yes | GET |
 
+## Tests
+
+Para ejecutar los tests use el siguiente comando:
+
+  ```bash
+  go test ./...
+  ```
+
 ## Estructura del proyecto
 
 Se utilizan los principios del patrón de diseño MVC para hacer mantenible y escalable el proyecto.
