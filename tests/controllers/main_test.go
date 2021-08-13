@@ -7,9 +7,8 @@ import (
 	"github.com/luisgomez29/antpack-go/tests"
 )
 
+// TestMain runs all the tests within the package.
 func TestMain(t *testing.M) {
 	tests.Init()
-	code := t.Run()
-
-	os.Exit(code)
+	os.Exit(t.Run())
 }

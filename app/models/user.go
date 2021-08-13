@@ -41,7 +41,7 @@ func (*User) ValidatePgError(err error) error {
 			switch pgErr.ConstraintName {
 			case "users_email_key":
 				e := errors.New("ya existe un usuario con este correo electrónico")
-				return validation.Errors{"username": e}
+				return validation.Errors{"email": e}
 			}
 		}
 		return echo.NewHTTPError(http.StatusInternalServerError, err)

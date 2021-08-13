@@ -32,16 +32,18 @@ API REST para la gestión de usuarios con GO.
        ```bash
        c:/go-migrate/migrate.exe
        ```
-       Si elige otra ruta para guardar el ejecutable debe configurar el archivo `migrate.sh`
+       Si elige otra ruta para guardar el ejecutable debe configurar el archivo `migrate.sh`.
 
-    3. Para ejecutar las migraciones abrir la consola `Git Bash` y usar el siguiente comando:
+    3. Configurar DSN para conectarse a la base de datos en el archivo `migrate.sh`.
+
+    4. Para ejecutar las migraciones abrir la consola `Git Bash` y usar el siguiente comando:
 
        ```bash
        export DBPWD=mypassword && . migrate.sh up
        ```
        Donde el valor de la variable de entorno `DBPWD` es la contraseña de la base de datos.
 
-    4. Dentro de la carpeta [db](./migrations/db) de `migrations` encontrará el script para insertar registros de
+    5. Dentro de la carpeta [db](./migrations/db) de `migrations` encontrará el script para insertar registros de
        prueba.
 
 
@@ -66,6 +68,8 @@ Ver [Migraciones](./migrations)
 
 ## Endpoints
 
+En la carpeta [postman](./postman) se encuentra la colección para consumir los endpoints.
+
 La API REST proporciona las siguientes rutas:
 
 ### Auth
@@ -84,10 +88,19 @@ La API REST proporciona las siguientes rutas:
 
 ## Tests
 
+Los tests se encuentran dentro de la carpeta [tests](./tests). Se prueban los endpoints de la API.
+
+Se utilizan los siguientes paquetes de Go:
+
+* Aserciones: [testify](https://github.com/stretchr/testify)
+* Generación de [**stubs**](https://stackoverflow.com/a/14081911) para simulación de
+  dependencias: [gomock](https://github.com/golang/mock)
+* Generador de datos aleatorios: [gofakeit](https://github.com/brianvoe/gofakeit)
+
 Para ejecutar los tests use el siguiente comando:
 
   ```bash
-  go test ./...
+  cd tests && go test -v ./...
   ```
 
 ## Estructura del proyecto
@@ -107,18 +120,20 @@ anpack-go
 │   ├── ├── ├── errors          Tipos y manejo de errores.
 │   ├── ├── ├── requests        Estructuras y otros modelos usados para hacer solicitudes.
 │   ├── ├── ├── responses       Estructuras y otros modelos usadas como respuesta.
-│   └── routes                  Rutas de la API.
-│   └── services                Logica de negocio.
+│   ├── routes                  Rutas de la API.
+│   ├── services                Logica de negocio.
 │   └── utils                   Funciones de ayuda utilizadas en todo el proyecto.
 ├── migrations                  Migraciones de base de datos
 │   ├── db                      Archivos de consultas SQL.
-│   ├── versions                Versiones individuales del esquema de la base de datos.
+│   └── versions                Versiones individuales del esquema de la base de datos.
 ├── pkg                         Paquetes generales independientes del framework usado.
 │   ├── config                  Archivos para leer variables de entorno.
 │   ├── database                Archivos para conectarse a base de datos.
+│   ├── faker                   Generador de datos falsos aleatorios.
+│   └── mock                    Archivos para simular la base de datos.
 ├── main.go                     Punto de entrada para iniciar el servidor.
 ├── .env.example                Archivo de ejemplo para configurar las variables de entorno.
-├── migrate.sh                  Script para ejecutar las migraciones de la base de datos.
+└── migrate.sh                  Script para ejecutar las migraciones de la base de datos.
 ```
 
 ## Autor

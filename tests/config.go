@@ -20,7 +20,7 @@ import (
 var DB *gorm.DB
 var E *echo.Echo
 
-// Init
+// Init Initializes the connection to the database and the server.
 func Init() {
 	if err := godotenv.Load("../../.env"); err != nil {
 		log.Fatal("Error loading .env file")
@@ -41,7 +41,7 @@ func Init() {
 	)
 }
 
-// Route
+// Route define the route group.
 func Route(e *echo.Echo) *echo.Group {
 	// Routes
 	api := e.Group("/api")
@@ -49,7 +49,7 @@ func Route(e *echo.Echo) *echo.Group {
 	return v1
 }
 
-// AddAuthorization
+// AddAuthorization add authorization header and JWT token to request.
 func AddAuthorization(request *http.Request, user *models.User, duration time.Duration) {
 	claims := auth.NewClaims(user)
 	claims.ExpiresAt = time.Now().Add(time.Minute * duration).Unix()

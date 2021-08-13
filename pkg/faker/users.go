@@ -11,7 +11,7 @@ import (
 	"github.com/luisgomez29/antpack-go/app/models"
 )
 
-// User generate a fake user for testing
+// User generate a fake user for testing.
 func User() (user *models.User, password string) {
 	password = "lg123456"
 	firstName := gofakeit.FirstName()

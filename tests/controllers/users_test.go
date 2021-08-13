@@ -18,9 +18,9 @@ import (
 	apiErrors "github.com/luisgomez29/antpack-go/app/resources/api/errors"
 	"github.com/luisgomez29/antpack-go/app/routes"
 	"github.com/luisgomez29/antpack-go/app/services"
-	mockrepo "github.com/luisgomez29/antpack-go/mock/repositories"
+	"github.com/luisgomez29/antpack-go/pkg/faker"
+	"github.com/luisgomez29/antpack-go/pkg/mock/repositories"
 	"github.com/luisgomez29/antpack-go/tests"
-	"github.com/luisgomez29/antpack-go/tests/faker"
 )
 
 func TestAll(t *testing.T) {
@@ -166,7 +166,6 @@ func TestGet(t *testing.T) {
 			},
 			checkResponse: func(recorder *httptest.ResponseRecorder) {
 				require.Equal(t, http.StatusNotFound, recorder.Code)
-				print("DATA", recorder.Body.String())
 			},
 		},
 	}
