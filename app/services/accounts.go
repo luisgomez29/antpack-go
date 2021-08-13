@@ -8,6 +8,7 @@ import (
 	"github.com/luisgomez29/antpack-go/app/resources/api/requests"
 )
 
+// AccountsService encapsulates usecase logic for account management.
 type AccountsService interface {
 	SignUp(input *requests.SignUpRequest) (*auth.JWTResponse, error)
 	Login(input *requests.LoginRequest) (*auth.JWTResponse, error)
@@ -53,7 +54,7 @@ func (s accountsService) Login(input *requests.LoginRequest) (*auth.JWTResponse,
 	return s.tokenAndUser(user)
 }
 
-// TokenAndUser returns the access JWT token and the user.
+// tokenAndUser returns the access JWT token and the user.
 func (s accountsService) tokenAndUser(user *models.User) (*auth.JWTResponse, error) {
 	user.Password = ""
 	tokens, err := s.auth.GetToken(user)

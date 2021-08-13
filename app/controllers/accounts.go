@@ -11,7 +11,7 @@ import (
 	"github.com/luisgomez29/antpack-go/app/services"
 )
 
-// AccountsController represents endpoints for authentication.
+// AccountsController manage account endpoints.
 type AccountsController interface {
 	SignUp(c echo.Context) error
 	Login(c echo.Context) error

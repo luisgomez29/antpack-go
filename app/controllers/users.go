@@ -8,7 +8,7 @@ import (
 	"github.com/luisgomez29/antpack-go/app/services"
 )
 
-// UsersController represents endpoints for users.
+// UsersController manage users endpoints.
 type UsersController interface {
 	All(c echo.Context) error
 	Get(c echo.Context) error

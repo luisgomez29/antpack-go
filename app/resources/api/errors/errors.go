@@ -8,7 +8,6 @@ import (
 )
 
 // ErrNoRows customize the error message when the error of type gorm.ErrRecordNotFound occurs.
-// Used as an error return value for utils.ValidateErrNoRows.
 type ErrNoRows struct {
 	msg string
 }
@@ -21,5 +20,5 @@ func NewErrNoRows(msg string) *ErrNoRows {
 	return &ErrNoRows{msg}
 }
 
-// PasswordMismatch occurs when passwords do not match
+// PasswordMismatch occurs when passwords do not match.
 var PasswordMismatch = validation.Errors{"password": fmt.Errorf("las contraseñas ingresadas no coinciden")}

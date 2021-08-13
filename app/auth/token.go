@@ -29,8 +29,8 @@ var (
 	errJWTimeSetting = echo.NewHTTPError(http.StatusInternalServerError, "Invalid time definition in .env file")
 )
 
-// Claims defines the username of the user and the standard claims to generate the JWT token.
-type Claims struct {
+// claims defines the username of the user and the standard claims to generate the JWT token.
+type claims struct {
 	jwt.StandardClaims
 
 	TokenType string
@@ -38,8 +38,8 @@ type Claims struct {
 }
 
 // NewClaims create the claims with values for the Id, IssuedAt and User.
-func NewClaims(u *models.User) *Claims {
-	return &Claims{
+func NewClaims(u *models.User) *claims {
+	return &claims{
 		StandardClaims: jwt.StandardClaims{
 			Id:       uuid.NewString(),
 			IssuedAt: time.Now().Unix(),
@@ -49,8 +49,8 @@ func NewClaims(u *models.User) *Claims {
 }
 
 // GenerateToken generate a JWT token from the claims.
-func GenerateToken(c *Claims) (string, error) {
-	claims := jwt.MapClaims{
+func GenerateToken(c *claims) (string, error) {
+	cl := jwt.MapClaims{
 		"token_type": c.TokenType,
 		"email":      c.User.Email,
 		"jti":        c.Id,
@@ -58,7 +58,7 @@ func GenerateToken(c *Claims) (string, error) {
 		"exp":        c.ExpiresAt,
 	}
 
-	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).SignedString(
+	token, err := jwt.NewWithClaims(jwt.SigningMethodHS256, cl).SignedString(
 		[]byte(config.Load("JWT_SIGNING_KEY")),
 	)
 
@@ -92,19 +92,19 @@ func VerifyToken(token string, tokenType ...string) (jwt.MapClaims, error) {
 		}
 	}
 
-	claims, ok := tk.Claims.(jwt.MapClaims)
+	cl, ok := tk.Claims.(jwt.MapClaims)
 	if !ok || !tk.Valid {
 		return nil, errJWTMissing
 	}
 
 	// Verify token type
 	if tokenType != nil {
-		if claims["token_type"] != tokenType[0] {
+		if cl["token_type"] != tokenType[0] {
 			return nil, errJWTInvalid
 		}
-		return claims, nil
+		return cl, nil
 	}
-	return claims, nil
+	return cl, nil
 }
 
 // ExtractToken get the token from the request header.
@@ -117,7 +117,7 @@ func ExtractToken(authzHeader string) (string, error) {
 }
 
 // newAccessAndRefreshClaims defines the claims of the access JWT token.
-func newAccessTokenClaims(u *models.User) (*Claims, error) {
+func newAccessTokenClaims(u *models.User) (*claims, error) {
 	atTime, err := utils.TimeDuration(config.Load("JWT_ACCESS_TOKEN_EXPIRATION_MINUTES"))
 	if err != nil {
 		return nil, errJWTimeSetting

@@ -57,12 +57,12 @@ func (auth) VerifyPassword(password, hashedPassword string) (bool, error) {
 }
 
 func (auth) GetToken(u *models.User) (map[string]string, error) {
-	claims, err := newAccessTokenClaims(u)
+	c, err := newAccessTokenClaims(u)
 	if err != nil {
 		return nil, err
 	}
 
-	accessToken, err := GenerateToken(claims)
+	accessToken, err := GenerateToken(c)
 	if err != nil {
 		return nil, err
 	}
@@ -78,8 +78,8 @@ func (a auth) UserEmailFromContext(c echo.Context) uint {
 	if user == nil {
 		return 0
 	}
-	claims := user.(jwt.MapClaims)
-	return claims["email"].(uint)
+	cl := user.(jwt.MapClaims)
+	return cl["email"].(uint)
 }
 
 func (a auth) IsAuthenticated(c echo.Context) (*AccessDetails, bool) {
